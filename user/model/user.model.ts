@@ -12,7 +12,7 @@ interface IUser extends Document{
     photo?: string;
     phoneNumb: number;
     isVerified: boolean;
-    pin : number;
+    pin : string;
     savedAddress: Types.Array<IAddress>;
     friends: Types.Array<string>;
 }
@@ -40,7 +40,8 @@ const userSchema : Schema = new Schema({
         default: false,
     },
     pin : {
-        type: Number
+        type: String,
+        require: true,
     },
     friends: {
         type: [String],
