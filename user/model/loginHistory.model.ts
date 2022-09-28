@@ -1,7 +1,7 @@
 import mongoose, { Schema, Types, Document, Model} from "mongoose";
 
-interface IHistory extends Document{
-    _id : Types.ObjectId;
+export interface IHistory extends Document{
+    _id? : Types.ObjectId;
     phoneNumb: number;
     timeStamp: Date;
 }
@@ -17,6 +17,4 @@ const historySchema : Schema = new Schema({
     }
 })
 
-const historyModel : Model<IHistory> = mongoose.model<IHistory>('LoginHistory', historySchema);
-
-export default historyModel;
+export const historyModel : Model<IHistory> = mongoose.model<IHistory>('LoginHistory', historySchema);

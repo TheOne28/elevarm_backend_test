@@ -6,7 +6,7 @@ interface IAddress extends Document{
 }
 
 export interface IUser extends Document{
-    _id: Types.ObjectId;
+    _id?: Types.ObjectId;
     name: string;
     email: string;
     photo?: string;

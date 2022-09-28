@@ -1,8 +1,8 @@
 import { Request, Response} from "express";
 import { generatePassword, verifyPassword } from "../lib/hash";
 import { generateToken } from "../lib/jwt";
-import {userModel, IUser} from "../model/user.model";
-import historyModel from "../model/loginHistory.model";
+import {userModel} from "../model/user.model";
+import {historyModel} from "../model/loginHistory.model";
 
 
 export async function loginHandler(req: Request<{}, {}, {}, {phoneNumb : number, pin: number}>, res: Response) {
@@ -82,7 +82,7 @@ export async function registerHandler(req: Request<{}, {}, {
             return;
         }
 
-        const user = await userModel.findOne({phoneNumb: phoneNumb}, 'pin').exec();
+        const user = await userModel.exists({phoneNumb: phoneNumb}).exec();
 
         if(user != null){
             res.status(404);
