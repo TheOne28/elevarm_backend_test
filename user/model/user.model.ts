@@ -5,7 +5,7 @@ interface IAddress extends Document{
     address: string;
 }
 
-interface IUser extends Document{
+export interface IUser extends Document{
     _id: Types.ObjectId;
     name: string;
     email: string;
@@ -55,6 +55,5 @@ const userSchema : Schema = new Schema({
     }
 })
 
-const userModel : Model<IUser> = mongoose.model<IUser>('User', userSchema);
+export const userModel : Model<IUser> = mongoose.model<IUser>('User', userSchema);
 
-export default userModel;
