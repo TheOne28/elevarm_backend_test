@@ -4,6 +4,6 @@ import { updateUserHandler, getProfileHandler } from "../controller/profileHandl
 const router : express.Router = express.Router();
 
 router.get("/", getProfileHandler);
-router.patch("/", updateUserHandler);
+router.put("/", updateUserHandler);
 
 module.exports = router;

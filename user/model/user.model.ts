@@ -14,7 +14,7 @@ export interface IUser extends Document{
     isVerified: boolean;
     pin : string;
     savedAddress?: Types.Array<IAddress>;
-    friends?: Types.Array<string>;
+    friends?: Types.Array<number>;
 }
 
 
@@ -44,7 +44,7 @@ const userSchema : Schema = new Schema({
         require: true,
     },
     friends: {
-        type: [String],
+        type: [Number],
         default: [],
     }, 
     savedAddress: {

@@ -20,6 +20,13 @@ if(uri != undefined){
     console.error("URI not exist")
 }
 
+const authenticationRoute = require('./routes/authenticationRoute');
+const profileRoute = require('./routes/profileRoute');
+const historyRoute = require('./routes/historyRoute');
+
+app.use('/authen', authenticationRoute);
+app.use('/profile', profileRoute);
+app.use('/hist', historyRoute);
 
 app.get('/', (req, res) => {
     console.log("Hello world");

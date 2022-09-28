@@ -34,7 +34,7 @@ export async function getHistoryHandler(req: Request, res: Response) {
 
 export async function postHistoryHandler(req: Request, res: Response) {
     try{
-        const newHistory = await historyModel.create(req.query);
+        const newHistory = await historyModel.create(req.body);
 
         res.status(200);
         res.send({
@@ -52,15 +52,14 @@ export async function postHistoryHandler(req: Request, res: Response) {
     }
 }
 
-export async function updateHistoryHandler(req: Request<{}, {}, {}, {
+export async function updateHistoryHandler(req: Request<{}, {}, {data: IHistory}, {
     phoneNumb: number,
     date: Date,
-    data: IHistory,
 }>, res: Response){
     try{
         const phoneNumb : number = req.query.phoneNumb;
         const date : Date = req.query.date;
-        const data : IHistory = req.query.data;
+        const data : IHistory = req.body.data;
 
         const newHistory = await historyModel.findOneAndUpdate({ phoneNumb: phoneNumb, timeStamp: date}, data, {returnDocument:'after'}).exec();
 
@@ -69,7 +68,7 @@ export async function updateHistoryHandler(req: Request<{}, {}, {}, {
             status: "Success",
             data: newHistory,
         })
-        
+            
     }catch(err : any){
         res.status(400);
         res.send({

@@ -1,4 +1,5 @@
 import {Request, Response} from "express";
+import { generatePassword } from "../lib/hash";
 import { userModel, IUser } from "../model/user.model";
 
 export async function getProfileHandler(req: Request, res: Response) {
@@ -32,31 +33,35 @@ export async function getProfileHandler(req: Request, res: Response) {
     }
 }
 
-export async function updateUserHandler(req: Request<{}, {}, {}, {
+export async function updateUserHandler(req: Request<{}, {}, {data: IUser}, {
     phoneNumb: number,
-    data : IUser
 }>, res: Response) {
     
     try{
-            const phoneNumb : number = req.query.phoneNumb;
-            const data: IUser = req.query.data;
+        const phoneNumb : number = req.query.phoneNumb;
+        const data: IUser = req.body.data;
+        console.log(data);
         
-            if(typeof phoneNumb == undefined || typeof data == undefined){
-                res.status(400);
-                res.send({
-                    status: "Error",
-                    data: "Bad Request"
-                })
-                return;
-            }
-        
-            const newUser = await userModel.findOneAndUpdate({phoneNumb: phoneNumb}, data, {returnDocument: 'after'}).exec();
-            
-            res.status(200);
+        if(typeof phoneNumb == undefined || typeof data == undefined){
+            res.status(400);
             res.send({
-                status: "Success",
-                data: newUser,
+                status: "Error",
+                data: "Bad Request"
             })
+            return;
+        }
+        console.log("Here");
+        const hashPin = await generatePassword(String(data.pin));
+        data.pin = hashPin;
+        
+        console.log(data);
+        const newUser = await userModel.findOneAndUpdate({phoneNumb: phoneNumb}, data, {returnDocument: 'after'}).exec();
+            
+        res.status(200);
+        res.send({
+            status: "Success",
+            data: newUser,
+        })
     }catch(err: any){
         res.status(200);
         res.send({
