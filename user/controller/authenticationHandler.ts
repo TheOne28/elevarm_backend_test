@@ -2,6 +2,7 @@ import { Request, Response} from "express";
 import { generatePassword, verifyPassword } from "../lib/hash";
 import { generateToken } from "../lib/jwt";
 import {userModel, IUser} from "../model/user.model";
+import historyModel from "../model/loginHistory.model";
 
 
 export async function loginHandler(req: Request<{}, {}, {}, {phoneNumb : number, pin: number}>, res: Response) {
@@ -33,6 +34,8 @@ export async function loginHandler(req: Request<{}, {}, {}, {phoneNumb : number,
 
         if(verified){
             const token : string = generateToken(phoneNumb, pin);
+            historyModel.create({phoneNumb: phoneNumb});
+            
             res.status(200);
             res.send({
                 status: "Success",
@@ -114,40 +117,4 @@ export async function registerHandler(req: Request<{}, {}, {
             data: err,
         })    
     }
-}
-
-export async function updateUser(req: Request<{}, {}, {}, {
-    phoneNumb: number,
-    data : IUser
-}>, res: Response) {
-    
-    try{
-            const phoneNumb : number = req.query.phoneNumb;
-            const data: IUser = req.query.data;
-        
-            if(typeof phoneNumb == undefined || typeof data == undefined){
-                res.status(400);
-                res.send({
-                    status: "Error",
-                    data: "Bad Request"
-                })
-                return;
-            }
-        
-            const newUser = await userModel.findOneAndUpdate({phoneNumb: phoneNumb}, data, {returnDocument: 'after'}).exec();
-            
-            res.status(200);
-            res.send({
-                status: "Success",
-                data: newUser,
-            })
-    }catch(err: any){
-        res.status(200);
-        res.send({
-            status: "Error",
-            data: err,
-        })
-    }
-
-
 }

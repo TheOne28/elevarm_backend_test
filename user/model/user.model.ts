@@ -13,8 +13,8 @@ export interface IUser extends Document{
     phoneNumb: number;
     isVerified: boolean;
     pin : string;
-    savedAddress: Types.Array<IAddress>;
-    friends: Types.Array<string>;
+    savedAddress?: Types.Array<IAddress>;
+    friends?: Types.Array<string>;
 }
 
 
