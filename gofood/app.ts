@@ -4,7 +4,7 @@ import expressInstance from './services/express';
 
 require('dotenv').config();
 
-const port = process.env.PORT || 3002;
+const port = process.env.PORT || 3003;
 const app : express.Application = expressInstance.getApp();
 
 const uri = process.env.ATLAS_URI as string;
