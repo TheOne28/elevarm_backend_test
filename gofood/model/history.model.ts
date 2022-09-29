@@ -1,7 +1,7 @@
 import mongoose, { Schema, Types, Document, Model } from "mongoose";
 
 
-interface IDriver extends Document{
+export interface IDriver extends Document{
     name: string,
     phoneNumb: number,
     vehicleCode: string,
@@ -12,7 +12,7 @@ interface IOrder extends Document{
     quantity: number;
 }
 
-export interface iHistory extends Document{
+export interface IHistory extends Document{
     _id?: Types.ObjectId;
     restaurantId: Types.ObjectId;
     phoneNumb: number;
@@ -58,5 +58,5 @@ const historySchema : Schema = new Schema({
     }
 })
 
-export const historyModel : Model<iHistory> = mongoose.model<iHistory>('History', historySchema);
+export const historyModel : Model<IHistory> = mongoose.model<IHistory>('History', historySchema);
 
