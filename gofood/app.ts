@@ -20,6 +20,13 @@ if(uri != undefined){
     console.error("URI not exist")
 }
 
+const menuRoute = require('./routes/menuRoute');
+const restaurantRoute = require('./routes/restaurantRoute');
+const historyRoute = require('./routes/historyRoute');
+
+app.use('/menu', menuRoute);
+app.use('/restaurant', restaurantRoute);
+app.use('/hist', historyRoute);
 
 app.get('/', (req, res) => {
     console.log("Hello world");

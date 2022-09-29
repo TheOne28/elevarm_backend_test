@@ -24,7 +24,7 @@ export interface IHistory extends Document{
 
 
 const historySchema : Schema = new Schema({
-    restaurant: {
+    restaurantId: {
         type: Types.ObjectId,
         required: true,
     },

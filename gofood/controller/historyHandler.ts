@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { cleanRequest } from "../lib/helper";
 import { historyModel, IDriver, IHistory } from "../model/history.model";
-import { IRestaurant } from "../model/restaurant.model";
+import { restaurantModel, IRestaurant } from "../model/restaurant.model";
 import { menuModel } from "../model/menu.model";
 
 
@@ -78,10 +78,14 @@ export async function postOrderHandler(req: Request<{}, {}, {
     var allOrderId = [];
     var totalPrice : number = 0;
 
+    /* @ts-ignore */
     /*@ts-ignore*/
     for(let order in cleanData['allOrder']){
         /* @ts-ignore */
-        const menuFound = await menuModel.findOne({name : order['name'], restaurantId: restFound._id}).exec();
+        const menuFound = await menuModel.findOne({name : cleanData['allOrder'][order]['name'], restaurantId: restFound._id}).exec();
+        
+        // /* @ts-ignore */
+        // console.log({name: order['name'], restaurantId: restFound._id});
         
         if(menuFound == null){
             res.status(400);
@@ -91,15 +95,18 @@ export async function postOrderHandler(req: Request<{}, {}, {
             })
             return;
         }
-        
+        /*@ts-ignore */
+        const quan = cleanData['allOrder'][order]['quantity'];
+
+        allOrderId.push({menuId: menuFound._id, quantity: quan});
         /* @ts-ignore */
-        allOrderId.push({menuId: menuFound._id, quantity: order['quantity']});
-        /* @ts-ignore */
-        totalPrice += (menuFound.price) * (order['quantity']);
+        totalPrice += (menuFound.price) * quan;
     }
 
     /* @ts-ignore */
     cleanData['allOrder'] = allOrderId;
+    /* @ts-ignore */
+    cleanData['totalPrice'] = totalPrice;
 
     const newOrder = await historyModel.create(cleanData);
 
@@ -119,7 +126,7 @@ export async function updateOrderHandler(req: Request<{}, {}, {data: IHistory}, 
             const phoneNumb : number = req.query.phoneNumb;
             const timeStamp : Date = req.query.timeStamp;
         
-            const newOrder = await historyModel.findOneAndUpdate({phoneNumb: phoneNumb, timeStamp: timeStamp}, req.body, {returnDocument: 'after'}).exec();
+            const newOrder = await historyModel.findOneAndUpdate({phoneNumb: phoneNumb, timeStamp: timeStamp}, req.body.data, {returnDocument: 'after'}).exec();
         
             res.status(200);
             res.send({

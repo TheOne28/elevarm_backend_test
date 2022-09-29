@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { cleanRequest } from "../lib/helper";
-import { menuModel } from "../model/menu.model";
+import { IMenu, menuModel } from "../model/menu.model";
 import { restaurantModel, IRestaurant } from "../model/restaurant.model";
 
 export async function getMenuHandler(req: Request, res: Response) {
@@ -61,8 +61,7 @@ export async function postMenuHandler(req: Request<{}, {}, {
         const cleanData : Object = cleanRequest(data);
         /*@ts-ignore */
         const restFound = await restaurantModel.exists(cleanData['restaurantQ']).exec();
-        
-
+        console.log(restFound);
         if(restFound == null){
             res.status(400);
             res.send({
@@ -71,11 +70,12 @@ export async function postMenuHandler(req: Request<{}, {}, {
             });
             return;
         }
-
+        
         /*@ts-ignore */
         cleanData['restaurantId'] = restFound._id;
         /*@ts-ignore*/
         delete cleanData['restaurantQ'];
+        console.log(cleanData);
         
         const existedMenu = await menuModel.exists(cleanData).exec();
 
@@ -105,7 +105,7 @@ export async function postMenuHandler(req: Request<{}, {}, {
     }
 }
 
-export async function updateMenuHandler(req: Request<{}, {}, {data: IRestaurant}, {
+export async function updateMenuHandler(req: Request<{}, {}, {data: IMenu}, {
     name: string,
     restaurantId: string,
 }>, res: Response) {

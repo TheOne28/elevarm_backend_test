@@ -34,6 +34,7 @@ const menuSchema : Schema = new Schema({
     description: {
         type: String,
         required: false,
+        default: "",
     },
     photo: {
         type: String,
@@ -50,7 +51,7 @@ const menuSchema : Schema = new Schema({
         type: Number,
         default: 0,
     },
-    restaurant: {
+    restaurantId: {
         type: Types.ObjectId,
         required: true,
     }
