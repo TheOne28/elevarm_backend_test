@@ -8,8 +8,8 @@ export interface IMenu extends Document{
     price : Number;
     description?: string;
     photo: string;
-    rating: Number;
-    numbOrdered: Number;
+    rating?: Number;
+    numbOrdered?: Number;
     restaurantId: Types.ObjectId;
 }
 
@@ -44,6 +44,7 @@ const menuSchema : Schema = new Schema({
         required: true,
         min: 0,
         max: 5,
+        default: 0,
     },
     numbOrdered: {
         type: Number,
