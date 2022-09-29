@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
-import { Types } from "mongoose";
 import { cleanRequest } from "../lib/helper";
-import { IMenu, menuModel } from "../model/menu.model";
+import { menuModel } from "../model/menu.model";
 import { restaurantModel, IRestaurant } from "../model/restaurant.model";
 
 export async function getMenuHandler(req: Request, res: Response) {
@@ -9,20 +8,20 @@ export async function getMenuHandler(req: Request, res: Response) {
         //If Query is empty, get All Menu
         //Else find spesific menu based on query
         if(JSON.stringify(req.query) === '{}'){
-            const alluser = await menuModel.find({}).exec();
+            const allmenu = await menuModel.find({}).exec();
             
             res.status(200);
             res.send({
                 status: "Success",
-                data: alluser,
+                data: allmenu,
             })
             return;
         }else{
-            const alluser = await menuModel.find(req.query).exec();
+            const allmenu = await menuModel.find(req.query).exec();
             res.status(200);
             res.send({
                 status: "Success",
-                data: alluser,
+                data: allmenu,
             })
             return;
         }
@@ -77,8 +76,19 @@ export async function postMenuHandler(req: Request<{}, {}, {
         cleanData['restaurantId'] = restFound._id;
         /*@ts-ignore*/
         delete cleanData['restaurantQ'];
+        
+        const existedMenu = await menuModel.exists(cleanData).exec();
 
-        const newMenu = await restaurantModel.create(cleanData);
+        if(existedMenu != null){
+            res.status(400);
+            res.send({
+                status: "Error",
+                data : "Menu already added",
+            });
+            return;
+        }
+
+        const newMenu = await menuModel.create(cleanData);
 
         res.status(200);
         res.send({
