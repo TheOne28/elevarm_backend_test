@@ -10,7 +10,7 @@ export interface IMenu extends Document{
     photo: string;
     rating: Number;
     numbOrdered: Number;
-    restaurant : string;
+    restaurantId: Types.ObjectId;
 }
 
 
@@ -50,7 +50,7 @@ const menuSchema : Schema = new Schema({
         default: 0,
     },
     restaurant: {
-        type: String,
+        type: Types.ObjectId,
         required: true,
     }
 })

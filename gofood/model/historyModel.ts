@@ -8,14 +8,13 @@ interface IDriver extends Document{
 }
 
 interface IOrder extends Document{
-    name: string;
-    restaurant: string;
+    menuID: Types.ObjectId;
     quantity: number;
 }
 
 export interface iHistory extends Document{
     _id?: Types.ObjectId;
-    restaurant : string;
+    restaurantId: Types.ObjectId;
     phoneNumb: number;
     timeStamp: Date;
     driver: IDriver;
@@ -26,7 +25,7 @@ export interface iHistory extends Document{
 
 const historySchema : Schema = new Schema({
     restaurant: {
-        type: String,
+        type: Types.ObjectId,
         required: true,
     },
     phoneNumb: {
@@ -52,8 +51,7 @@ const historySchema : Schema = new Schema({
     },
     allOrder: {
         type: [{
-            name: String,
-            restaurant: String,
+            menuID: Types.ObjectId,
             quantity: Number,
         }],
         required: true,
