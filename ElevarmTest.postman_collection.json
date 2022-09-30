@@ -1,0 +1,665 @@
+{
+	"info": {
+		"_postman_id": "e1cc5fe4-7ba2-42b2-aa34-c2319af5f9f2",
+		"name": "ElevarmTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16953480"
+	},
+	"item": [
+		{
+			"name": "UserServices",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port1}}/user/authen/?phoneNumb=12345670&pin=12345",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port1}}",
+							"path": [
+								"user",
+								"authen",
+								""
+							],
+							"query": [
+								{
+									"key": "phoneNumb",
+									"value": "12345670"
+								},
+								{
+									"key": "pin",
+									"value": "12345"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port1}}/user/profile/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port1}}",
+							"path": [
+								"user",
+								"profile",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Spesific User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port1}}/user/profile/?name=akun1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port1}}",
+							"path": [
+								"user",
+								"profile",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "akun1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login History",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port1}}/user/hist/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port1}}",
+							"path": [
+								"user",
+								"hist",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"akun1\",\r\n    \"email\" : \"akun2@email.com\",\r\n    \"photo\" : \"abcdef\",\r\n    \"phoneNumb\": 123456710,\r\n    \"pin\" : 12345\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:{{port1}}/authen/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port1}}",
+							"path": [
+								"authen",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add History",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phoneNumb\" : 123444,\r\n    \"timeStamp\" : \"2022-10-29\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/hist/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"hist",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\" : {\r\n        \"name\" : \"akun1\",\r\n        \"email\" : \"akun2@email.com\",\r\n        \"photo\" : \"abcdef\",\r\n        \"phoneNumb\": 123456710,\r\n        \"isVerified\" : false,\r\n        \"pin\" : 12345,\r\n        \"savedAddress\" : [{\r\n            \"name\" : \"jalan1\",\r\n            \"address\": \"Cisitu lama\"\r\n        }],\r\n        \"friends\" : [101, 110, 623]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:{{port1}}/profile/?phoneNumb=123456710",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port1}}",
+							"path": [
+								"profile",
+								""
+							],
+							"query": [
+								{
+									"key": "phoneNumb",
+									"value": "123456710"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update History",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\" : {\r\n        \"phoneNumb\" : 12345679,\r\n        \"timeStamp\" : \"2022-09-29T10:35:27.266Z\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:{{port1}}/user/hist/?phoneNumb=12345679&date=2022-09-28T10:35:27.266Z",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port1}}",
+							"path": [
+								"user",
+								"hist",
+								""
+							],
+							"query": [
+								{
+									"key": "phoneNumb",
+									"value": "12345679"
+								},
+								{
+									"key": "date",
+									"value": "2022-09-28T10:35:27.266Z"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GoFoodServices",
+			"item": [
+				{
+					"name": "All Menu",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port2}}/gofood/menu",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port2}}",
+							"path": [
+								"gofood",
+								"menu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Restaurant",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port2}}/gofood/restaurant",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port2}}",
+							"path": [
+								"gofood",
+								"restaurant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port2}}/gofood/hist",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port2}}",
+							"path": [
+								"gofood",
+								"hist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Spesific Restaurant",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port2}}/gofood/restaurant?address=Cisitu indah",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port2}}",
+							"path": [
+								"gofood",
+								"restaurant"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "resto1",
+									"disabled": true
+								},
+								{
+									"key": "address",
+									"value": "Cisitu indah"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Spesific Menu",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port2}}/gofood/menu?type=Makanan",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port2}}",
+							"path": [
+								"gofood",
+								"menu"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Sate",
+									"disabled": true
+								},
+								{
+									"key": "type",
+									"value": "Makanan"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Spesific Order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port2}}/gofood/hist?phoneNumb=8122888021",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port2}}",
+							"path": [
+								"gofood",
+								"hist"
+							],
+							"query": [
+								{
+									"key": "phoneNumb",
+									"value": "8122888021"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add restaurant",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"resto1\",\r\n    \"address\" : \"Cisitu baru\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:{{port2}}/gofood/restaurant",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port2}}",
+							"path": [
+								"gofood",
+								"restaurant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Menu",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\":{\r\n        \"name\": \"Air putih\",\r\n        \"type\": \"Minuman\",\r\n        \"price\": 1000,\r\n        \"photo\" : \"abcde\",\r\n        \"restaurantQ\": {\r\n            \"name\" : \"resto1\",\r\n            \"address\" : \"Cisitu baru\"\r\n        }\r\n    }    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:{{port2}}/gofood/menu",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port2}}",
+							"path": [
+								"gofood",
+								"menu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\": {\r\n        \"phoneNumb\" : 8122888021,\r\n        \"driver\": {\r\n            \"name\" : \"Driver 1\",\r\n            \"phoneNumb\": 88888888,\r\n            \"vehicleCode\" : \"A1234B\"\r\n        },\r\n        \"restaurantQ\" : {\r\n            \"name\": \"resto1\",\r\n            \"address\" : \"Cisitu baru\"\r\n        },\r\n        \"allOrder\": [{\r\n            \"name\" : \"Air putih\",\r\n            \"quantity\" : 1\r\n        }, {\r\n            \"name\" : \"Nasi goreng\",\r\n            \"quantity\": 2\r\n        }]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:{{port2}}/gofood/hist",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port2}}",
+							"path": [
+								"gofood",
+								"hist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Resto",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"restoBaru\",\r\n    \"address\" : \"Jakarta\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:{{port2}}/gofood/restaurant?name=resto1&address=Cisitu indah",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port2}}",
+							"path": [
+								"gofood",
+								"restaurant"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "resto1"
+								},
+								{
+									"key": "address",
+									"value": "Cisitu indah"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Menu",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Roti\",\r\n    \"type\": \"Makanan\",\r\n    \"price\": 1000,\r\n    \"description\": \"\",\r\n    \"photo\": \"abcde\",\r\n    \"rating\": 0,\r\n    \"numbOrdered\": 2,\r\n    \"restaurantId\": \"6335a7f53ce4112ad26cbad6\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:{{port2}}/gofood/menu?name=Sate&restaurantId=6335a7f53ce4112ad26cbad6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port2}}",
+							"path": [
+								"gofood",
+								"menu"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Sate"
+								},
+								{
+									"key": "restaurantId",
+									"value": "6335a7f53ce4112ad26cbad6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update order",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\": {\r\n            \"restaurantId\": \"6335a8133ce4112ad26cbadd\",\r\n            \"phoneNumb\": 81228880231,\r\n            \"timeStamp\": \"2022-09-29T15:49:46.951Z\",\r\n            \"driver\": {\r\n                \"name\": \"Driver 2\",\r\n                \"phoneNumb\": 88888889,\r\n                \"vehicleCode\": \"A1234B\",\r\n                \"_id\": \"6335be9d9de1db1f9bdc62a8\"\r\n            },\r\n            \"allOrder\": [\r\n                {\r\n                    \"quantity\": 1,\r\n                    \"_id\": \"6335be9d9de1db1f9bdc62a9\"\r\n                },\r\n                {\r\n                    \"quantity\": 2,\r\n                    \"_id\": \"6335be9d9de1db1f9bdc62aa\"\r\n                }\r\n            ]\r\n        }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:{{port2}}/gofood/hist?phoneNumb=8122888021&timeStamp=2022-09-29T15:49:46.951Z",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port2}}",
+							"path": [
+								"gofood",
+								"hist"
+							],
+							"query": [
+								{
+									"key": "phoneNumb",
+									"value": "8122888021"
+								},
+								{
+									"key": "timeStamp",
+									"value": "2022-09-29T15:49:46.951Z"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Menu",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port2}}/gofood/menu?name=Roti&restaurantId=6335a7f53ce4112ad26cbad6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port2}}",
+							"path": [
+								"gofood",
+								"menu"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Roti"
+								},
+								{
+									"key": "restaurantId",
+									"value": "6335a7f53ce4112ad26cbad6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Restaurant",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port2}}/gofood/restaurant?name=resto2&address=Cisitu indah",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port2}}",
+							"path": [
+								"gofood",
+								"restaurant"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "resto2"
+								},
+								{
+									"key": "address",
+									"value": "Cisitu indah"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

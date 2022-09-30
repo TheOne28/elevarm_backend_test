@@ -3,7 +3,6 @@ require('dotenv').config();
 
 interface IRoute {
     url : string,
-    auth : boolean,
     ratelimit? : {
         windowMs: number,
         max : number,
@@ -21,7 +20,6 @@ interface IRoute {
 const routes : IRoute[]= [
     {
         url: '/user',
-        auth: false,
         proxy:{
             target: process.env.API_USER as string,
             changeOrigin: true,
@@ -33,7 +31,6 @@ const routes : IRoute[]= [
         }
     },{
         url: '/gofood',
-        auth: true,
         proxy: {
             target: process.env.API_GOFOOD as string,
             changeOrigin: false,
