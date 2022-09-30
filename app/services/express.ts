@@ -1,6 +1,9 @@
 import express from 'express';
 import cors from 'cors'
 import morgan from 'morgan';
+import { createProxyMiddleware } from 'http-proxy-middleware';
+
+import routes from '../routes';
 
 class ExpressInstance{
     private static expressInstance : ExpressInstance;
@@ -16,7 +19,9 @@ class ExpressInstance{
         this._app.use(express.urlencoded({limit: '50mb', extended:true}));
         this._app.use(morgan('combined'));
 
-        
+        routes.forEach(route => {
+            this._app.use(route.url, createProxyMiddleware(route.proxy));
+        });
     }
 
     public static getInstance(): ExpressInstance{
